@@ -1,0 +1,16 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.page {
+  border: 1px solid teal;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.page--current {
+  border: 2px solid red;
+  font-weight: bold;
+}

@@ -1,0 +1,29 @@
+.NavBar {
+  height: 50px;
+  width: 100vw;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid teal;
+  background: #e3f2fd;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  position: relative;
+  left: 50px;
+  bottom: 25px;
+}
+
+.link {
+  text-decoration: none;
+  position: relative;
+  top: 1px;
+  padding: 4px;
+  color: black;
+  border: 1px solid teal;
+}
+
+.link:hover {
+  background-color: #f8f8ff;
+}

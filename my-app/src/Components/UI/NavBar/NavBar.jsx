@@ -1,17 +1,23 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Query } from "../../../Hooks/useContext";
+import { Auth, Query } from "../../../Hooks/useContext";
 import MyButton from "../Button/MyButton";
 import Input from "./Input/Input";
 import "./NavBar.css";
 
 const NavBar = () => {
   const { filter, setFilter } = useContext(Query);
+  const { setIsAuth } = useContext(Auth);
+
+  const exit = () => {
+    setIsAuth(false);
+    localStorage.removeItem("isAuth");
+  };
 
   return (
     <nav className="NavBar">
       <div>
-        <MyButton>Exit</MyButton>
+        <MyButton onClick={exit}>Exit</MyButton>
       </div>
       <div>
         <ul className="nav-list">

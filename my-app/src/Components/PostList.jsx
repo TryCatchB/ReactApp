@@ -4,7 +4,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 const PostList = ({ posts, title, removePost }) => {
   if (!posts.length) {
-    return <h1 style={{ textAlign: "center" }}>Posts not find</h1>;
+    return <h1 style={{ textAlign: "center" }}>Posts didn't find</h1>;
   }
 
   return (

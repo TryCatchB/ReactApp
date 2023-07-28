@@ -25,7 +25,7 @@ const InformationAboutPost = () => {
   useEffect(() => {
     fetchInfo();
     fetchCooments();
-  }, []);
+  });
 
   return (
     <div className="InformationAboutPost">

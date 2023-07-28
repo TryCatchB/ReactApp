@@ -27,17 +27,8 @@ const Posts = () => {
     const response = await PostService.getAll(limit, page);
     const totalCount = response.headers["x-total-count"];
     setTotalPages(getPagesCount(totalCount, limit));
-    setPosts([...posts, ...response.data]);
+    setPosts((prev) => [...prev, ...response.data]);
   });
-
-  useObserver(lastElement, isPostsLoading, page < totalPages, () => {
-    setPage(page + 1);
-  });
-
-  const createPost = (newPost) => {
-    setPosts([...posts, newPost]);
-    setModal(false);
-  };
 
   useEffect(() => {
     fetchPosts();
@@ -46,6 +37,15 @@ const Posts = () => {
   const removePost = (post) => {
     setPosts(posts.filter((p) => p.id !== post.id));
   };
+
+  const createPost = (newPost) => {
+    setPosts((prev) => [...prev, newPost]);
+    setModal(false);
+  };
+
+  useObserver(lastElement, isPostsLoading, page < totalPages, () => {
+    setPage(page + 1);
+  });
 
   return (
     <div className="App">
@@ -68,13 +68,16 @@ const Posts = () => {
           { value: "-1", title: "All posts" },
         ]}
       />
+
       <PostList
         removePost={removePost}
         posts={sortedAndSearchedPosts}
         title="Posts list"
       />
+
       <div ref={lastElement}></div>
       {postError && <h1 style={{ textAlign: "center" }}>Error {postError}</h1>}
+
       {isPostsLoading && (
         <div
           style={{

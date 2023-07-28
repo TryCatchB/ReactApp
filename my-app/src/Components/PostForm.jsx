@@ -1,33 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
 import MyButton from "./UI/Button/MyButton";
 import MyInput from "./UI/Input/MyInput";
+import { useForm } from "react-hook-form";
 
 const PostForm = ({ createPost }) => {
-  const [post, setPost] = useState({ title: "", body: "" });
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const addNewPost = (event) => {
+  const addNewPost = (data) => {
     const newPost = {
-      ...post,
+      ...data,
       id: Date.now(),
     };
     createPost(newPost);
-    event.preventDefault();
-    setPost({ title: "", body: "" });
+    reset();
   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit(addNewPost)}>
       <MyInput
         placeholder="Title"
-        value={post.title}
-        onChange={(event) => setPost({ ...post, title: event.target.value })}
+        {...register("title", { required: "Title is required" })}
       />
+      {errors.title && <span>{errors.title.message}</span>}
       <MyInput
         placeholder="Description"
-        value={post.body}
-        onChange={(event) => setPost({ ...post, body: event.target.value })}
+        {...register("body", { required: "Description is required" })}
       />
-      <MyButton onClick={addNewPost}>Create</MyButton>
+      {errors.body && <span>{errors.body.message}</span>}
+      <MyButton>Create</MyButton>
     </form>
   );
 };
